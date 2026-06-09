@@ -49,7 +49,7 @@ export function About() {
           {/* Founder */}
           <div className="rounded-2xl bg-white p-6 text-center shadow-md">
             <img
-              src="./src/assets/IMG_20250510_200532_1.jpg              "
+              src="./src/assets/hero.png          "
               alt="Founder"
               className="mx-auto mb-4 h-32 w-32 rounded-full border-4 border-indigo-500 object-cover"
             />
