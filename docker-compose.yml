@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  clamd:
+    image: mkodockx/docker-clamav:alpine
+    restart: unless-stopped
+    ports:
+      - '3310:3310'
+    healthcheck:
+      test: ['CMD', 'bash', '-lc', 'echo PING | nc -w 3 localhost 3310 | grep -q PONG']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - clamav-db:/var/lib/clamav
+
+volumes:
+  clamav-db:
+    driver: local
